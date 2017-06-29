@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+def AAVersion = '4.0.0'
+android {
+
+    //为了解决部分第三方库重复打包了META-INF的问题
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.tyhj.wallpaper"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 6
+        versionName "3.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('wallpaperkey.jks')
+            storePassword 'Lyb92ndlf'
+            keyAlias 'wallpapr'
+            keyPassword 'Lyb92ndlf'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'cn.leancloud.android:avoscloud-sdk:v4.1.0'
+    compile 'com.facebook.fresco:animated-gif:0.12.0'
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:palette-v7:25.3.1'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    apt 'com.google.dagger:dagger-compiler:2.4'
+    compile 'com.google.dagger:dagger:2.4'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    testCompile 'junit:junit:4.12'
+    compile 'tyrant:heartlayout:1.0.1'
+    compile files('libs/lite-orm-1.9.2.jar')
+    compile files('libs/mysql-connector-java-5.0.8-bin.jar')
+
+    compile'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    compile'com.squareup.retrofit2:retrofit:2.2.0'
+    compile'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
+repositories {
+    mavenCentral()
+}

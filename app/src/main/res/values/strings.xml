@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">壁纸</string>
+    <string name="wallpaper_description">wallpaper1</string>
+    <string name="wallpaper_description2">wallpaper2</string>
+    <string name="wallpaper_description3">wallpaper3</string>
+    <string name="wallpaper_description4">wallpaper4</string>
+    <string name="wallpaper_description5">wallpaper5</string>
+    <string name="wallpaper_description6">wallpaper6</string>
+    <string name="wallpaper_description7">wallpaper7</string>
+    <string name="wallpaper_description8">wallpaper8</string>
+    <string name="wallpaper_description9">wallpaper9</string>
+    <string name="wallpaper_description10">wallpaper10</string>
+
+
+    <string name="privateKey">MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJDL0+aS4nOGtnPsKxfKj30pw6yg
+Lt7ilpmK2OOu0f6wy6zezSgEpmaYE7dbK3FkUAC2vr8RL3zVZPMJKX1fsmA6kbBSXNh4xHBRXPko
+zN4S6jrPjdbEk4UfUhrHMLd872jF14fcr2blZuGJ1UuABCJL51YS9Nriv2NMZlSuZc0PAgMBAAEC
+gYBXHsy4hthJulw9E3Q6NF5xaJebXiXVZXBHogstsxoWrDlgIg4+bc3RHN+ACxLwfvLD+zB5tdVk
+vuCmenTEQrgH1d2VCn62lLx/o8D13A9UMWtyFRsdjhsJNrV+ksYm7hX4rClslWRfO+l+2Yi2QwuR
+qgrnMuY6ARby0zJH9GBqAQJBAM+cqBA0E25lU3qTc7aLtL8SX5o0UtwmGDc1RGhn2twPbuEvmLrx
+gmWTDrNpzAOGNizt94NIF0hPXtAKTWPLhmECQQCyizd4GRPb+KnZBECLaRmInTIzPQlGiM0IHVKN
+FQsIdVtDHeEdyc7kN8kNvHhLZigFPEHAC59AXyoTGdbyQSlvAkB//OGW66O3APxPqqtBNCs/R8Js
+PCmA0nNHRa1gd/XyiAkhBciwJsbue5QqguRkn86yMBnQcxb3WwbmVhOTnBrBAkBpn+ih2Rwhj1tT
+8qsIjpW3d1/CZkJ9guLhAQ/cPO25BEyIST3rdH88DjCYOr5jxLy6VCqFpZqB54qpoCjESn5rAkA+
+09nWCNxV60kJS9xnTWqDYdUE8eSvCqDqwGblpGfzxaR8QDhMPbbmLCyTj2jMvfn68/UN8ju7Khbe
+bqdpRkfu</string>
+
+</resources>

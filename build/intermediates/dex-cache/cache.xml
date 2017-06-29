@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/libs/mysql-connector-java-5.0.8-bin.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7b9bfb6c4e4885660378a9c13330915c321f6cca">
+        <dex dex="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/transforms/dex/debug/folders/1000/2/mysql-connector-java-5.0.8-bin_1112ce7f618a6196172822cf564973269e3e5fa0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/libs/sun.misc.BASE64Decoder.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="acd93e3727886196f9b8434279ff445ba8611186">
+        <dex dex="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/transforms/dex/debug/folders/1000/2/sun.misc.BASE64Decoder_485efb2989428269e18778159ec66afe1528a6ad/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b6fd246a5c146a3d434d4bc7e4856b18d77f9b8c">
+        <dex dex="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ff0d66ac9cb9c70576f33c541681a9ae86d89603/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/libs/lite-orm-1.9.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7691b96fd27f2991cb4779c22f9089bf268945c8">
+        <dex dex="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/transforms/dex/debug/folders/1000/2/lite-orm-1.9.2_c335ae966aa776c2788390da972202e7fc63cd59/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/Users/Tyhj/AndroidStudioProjects/Wallpaper/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_ff6bb19179e3acfd37eee30d17e9f73c7bca63c9/classes.dex" />
+    </item>
+
+</items>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <SurfaceView
+            android:id="@+id/surFace"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:elevation="5dp"
+        android:src="@drawable/ic_photo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="4dp"
+        android:gravity="center_horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcyle_wallpaper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="25dp"
+            android:paddingTop="25dp">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"
+        android:scaleType="centerCrop" />
+
+
+    <LinearLayout
+        android:elevation="3dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right">
+
+        <tyrantgit.widget.HeartLayout
+            android:id="@+id/heart"
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+        </tyrantgit.widget.HeartLayout>
+    </LinearLayout>
+
+
+    <ImageView
+        android:elevation="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="28dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/iv_sign"
+        android:layout_width="80dp"
+        android:layout_height="70dp" />
+
+</RelativeLayout>
