@@ -66,8 +66,6 @@ public class GifWallpaperService extends WallpaperService {
     //Engine是WallpaperService中的一个内部类，实现了壁纸窗口的创建以及Surface的维护工作
     class Mngine extends Engine {
 
-        private boolean mVisible;
-
         //线程
         private Runnable runnable = new Runnable() {
             @Override
@@ -109,7 +107,6 @@ public class GifWallpaperService extends WallpaperService {
 
         @Override
         public void onVisibilityChanged(boolean visible) {
-            mVisible = visible;
             initGif();
             /*下面这个判断好玩，就是说，如果屏幕壁纸状态转为显式时重新绘制壁纸，否则黑屏幕，隐藏就可以*/
             if (visible) {
@@ -133,7 +130,6 @@ public class GifWallpaperService extends WallpaperService {
         @Override
         public void onSurfaceDestroyed(SurfaceHolder holder) {
             super.onSurfaceDestroyed(holder);
-            mVisible = false;
             mHandler.removeCallbacks(runnable);
         }
 
