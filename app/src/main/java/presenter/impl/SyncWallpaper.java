@@ -92,8 +92,7 @@ public class SyncWallpaper {
         });
     }
 
-    static String url3 = "jxxxxxxxxxxxxxxxxxx";
-
+    static String url3 = "jdbc:mysql://118.190.172.230/wallpaper?useUnicode=true&characterEncoding=utf8";
 
     //初始化
     private static synchronized Statement init() {
@@ -107,7 +106,7 @@ public class SyncWallpaper {
             e.printStackTrace();
         }
         try {
-            conn = (Connection) DriverManager.getConnection(url3, "txxxyx", "xxxxxxx");
+            conn = (Connection) DriverManager.getConnection(url3, "tyhj", "4444");
             // System.out.println("成功加载conn！");
         } catch (SQLException e) {
             e.printStackTrace();

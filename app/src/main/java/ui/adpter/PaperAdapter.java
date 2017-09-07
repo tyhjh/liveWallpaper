@@ -17,6 +17,7 @@ import com.tyhj.wallpaper.R;
 import java.util.ArrayList;
 
 import model.entity.WallPaper;
+import ui.activity.GifActivity_;
 import ui.activity.ShowImage_;
 import util.Uiutil;
 
@@ -44,11 +45,11 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
 
     @Override
     public void onBindViewHolder(final PaperHolder holder, int position) {
-        holder.tv_name.setText(papers.get(position).getName()+"");
-        if(papers.get(holder.getPosition()).getId()>0) {
-            Picasso.with(context).load(papers.get(holder.getPosition()).getImage()).resize(100,100).centerCrop().into(holder.iv_paper);
-        }else {
-            switch (papers.get(holder.getPosition()).getId()){
+        holder.tv_name.setText(papers.get(position).getName() + "");
+        if (papers.get(holder.getPosition()).getId() > 0) {
+            Picasso.with(context).load(papers.get(holder.getPosition()).getImage()).resize(100, 100).centerCrop().into(holder.iv_paper);
+        } else {
+            switch (papers.get(holder.getPosition()).getId()) {
                 case -1:
                     Picasso.with(context).load(R.mipmap.logo1).into(holder.iv_paper);
                     break;
@@ -66,7 +67,12 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
         holder.iv_paper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ShowImage_.class);
+                Intent intent;
+
+                if (papers.get(holder.getPosition()).getMv()==null||papers.get(holder.getPosition()).getMv().endsWith(".mp4"))
+                    intent = new Intent(context, ShowImage_.class);
+                else
+                    intent = new Intent(context, GifActivity_.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("wallPager", papers.get(holder.getPosition()));
                 intent.putExtras(bundle);
@@ -83,13 +89,14 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
     class PaperHolder extends RecyclerView.ViewHolder {
         SimpleDraweeView iv_paper;
         TextView tv_name;
+
         public PaperHolder(View itemView) {
             super(itemView);
-            tv_name= (TextView) itemView.findViewById(R.id.tv_name);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             iv_paper = (SimpleDraweeView) itemView.findViewById(R.id.iv_paper);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 iv_paper.setClipToOutline(true);
-                iv_paper.setOutlineProvider(Uiutil.getOutline(false,10,12));
+                iv_paper.setOutlineProvider(Uiutil.getOutline(false, 10, 12));
             }
         }
     }

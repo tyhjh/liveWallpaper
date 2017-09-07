@@ -26,7 +26,7 @@ public class CallbackConvert implements Converter<ResponseBody,CallbackInfo> {
         try {
             JSONObject jsonObject=new JSONObject(callback);
             if(jsonObject.getInt("code")==200){
-                return new CallbackInfo(callback);
+                return new CallbackInfo(jsonObject.getString("leftNote"));
             }
         } catch (JSONException e) {
             e.printStackTrace();

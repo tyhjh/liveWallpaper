@@ -14,8 +14,11 @@ import java.io.Serializable;
 @Table("wall_paper")
 public class WallPaper implements Serializable{
 
+
+
     @PrimaryKey(AssignType.BY_MYSELF)
     int id;
+
     @NotNull
     int type;
 

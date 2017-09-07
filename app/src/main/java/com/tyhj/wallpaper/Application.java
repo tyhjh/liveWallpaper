@@ -32,15 +32,15 @@ public class Application extends android.app.Application {
     static LiteOrm liteOrm;
     public static boolean isFirstCamera = true;
     private static Retrofit retrofit;
-    private static boolean ISDEBUG=false;
+    private static boolean ISDEBUG=true;
     private static Context context;
-
+    private static String gifPath=null;
     @Override
     public void onCreate() {
         super.onCreate();
         // 初始化参数依次为 this, AppId, AppKey
         context=getBaseContext();
-        AVOSCloud.initialize(this, "xxxxxxxxxxxxxx-xxxxxxxx", "xxxxxxxxxxxxxxxxxx");
+        AVOSCloud.initialize(this, "9TEdV93wArW7MsWdxs68q3SA-gzGzoHsz", "GWOVe9GReFOYa6HlnefJzE98");
         liteOrm = LiteOrm.newSingleInstance(getApplicationContext(), ".db");
         initDir();
         initPicasso();
@@ -67,7 +67,6 @@ public class Application extends android.app.Application {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
     }
-
 
     private void initPicasso() {
         Picasso picasso = new Picasso.Builder(this)
@@ -138,6 +137,14 @@ public class Application extends android.app.Application {
         return height * 3 / 6;
     }
 
+    public static String getGifPath() {
+        return gifPath;
+    }
+
+    public static void setGifPath(String gifPath) {
+        Application.gifPath = gifPath;
+    }
+
     /**
      * 设置返回数据的  Interceptor  判断网络   没网读取缓存
      */
@@ -155,7 +162,6 @@ public class Application extends android.app.Application {
             }
         };
     }
-
 
     /**
      * 设置连接器  设置缓存
@@ -185,8 +191,6 @@ public class Application extends android.app.Application {
             }
         };
     }
-
-
 
     public static void log(String key,String msg) {
         if (ISDEBUG)

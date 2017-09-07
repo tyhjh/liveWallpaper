@@ -33,7 +33,7 @@ public class WallpapeprConvert implements Converter<ResponseBody, ArrayList<Wall
                 JSONArray array = object.getJSONArray("wallpapers");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject json = array.getJSONObject(i);
-                    papers.add(new WallPaper(json.getInt("id"), 2,
+                    papers.add(0,new WallPaper(json.getInt("id"), 2,
                             json.getString("image"),
                             json.getString("name"),
                             json.getString("mv"), null, null,

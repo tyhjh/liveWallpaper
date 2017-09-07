@@ -37,6 +37,7 @@ import javax.inject.Inject;
 import di.component.DaggerPaperComponent;
 import di.modules.ShowImageModule;
 import model.entity.WallPaper;
+import model.entity.WallPaperNow;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
 import ui.common.BaseActivity;
@@ -54,6 +55,8 @@ import util.image.BlurUtil;
 public class ShowImage extends BaseActivity implements ShowDownloadFile {
 
     int mProgress = 0;
+
+    WallPaperNow wallPaperNow;
 
     boolean canDownload=true;
 
@@ -96,7 +99,6 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
         } else {
             setSelf();
         }
-
             if(wallPaper.getType() == 1&&!FileUtil.isFile(wallPaper.getDataPath())){
                 wallPaper.setType(2);
             }
@@ -212,6 +214,8 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
         Application.setImageId(-1);
         Application.setImageDir(wallPaper.getDataPath());
         changePaper(VideoWallpaper.class.getCanonicalName());
+        wallPaperNow=new WallPaperNow(1,-1,0,wallPaper.getDataPath());
+        Application.getLiteOrm().save(wallPaperNow);
     }
 
     //设置壁纸
@@ -233,19 +237,27 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
         switch (wallPaper.getId()) {
             case -1:
                 changePaper(MallpaperService.class.getCanonicalName());
+                wallPaperNow=new WallPaperNow(-1,-1,0,null);
+                Application.getLiteOrm().save(wallPaperNow);
                 break;
             case -2:
                 changePaper(CameraLiveWallpaper.class.getCanonicalName());
+                wallPaperNow=new WallPaperNow(-2,-1,0,null);
+                Application.getLiteOrm().save(wallPaperNow);
                 break;
             case -3:
                 Application.setImageId(R.raw.bird);
                 Application.setImageDir(null);
                 changePaper(VideoWallpaper.class.getCanonicalName());
+                wallPaperNow=new WallPaperNow(-3,-1,0,null);
+                Application.getLiteOrm().save(wallPaperNow);
                 break;
             case -4:
                 Application.setImageId(R.raw.girl);
                 Application.setImageDir(null);
                 changePaper(VideoWallpaper.class.getCanonicalName());
+                wallPaperNow=new WallPaperNow(-4,-1,0,null);
+                Application.getLiteOrm().save(wallPaperNow);
                 break;
             default:
                 break;
@@ -255,7 +267,7 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
     //下载视频
     private void download() {
         if(canDownload) {
-            wallPaper.setDataPath(Environment.getExternalStorageDirectory() + "/AWallpaper/" + wallPaper.getName() + ".mp4");
+            wallPaper.setDataPath(Environment.getExternalStorageDirectory() + "/AWallpaper/" + wallPaper.getName() +wallPaper.getId()+ ".mp4");
             DaggerPaperComponent.builder()
                     .showImageModule(new ShowImageModule(this,wallPaper.getMv(), wallPaper.getDataPath()))
                     .build()
@@ -301,8 +313,8 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
 
     @Override
     protected void onRestart() {
-        super.onRestart();
         this.finish();
+        super.onRestart();
     }
 
     @Override

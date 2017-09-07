@@ -35,9 +35,20 @@ public class KeyUtil {
     public static final String KEY_SHA="SHA";
     public static final String KEY_MD5="MD5";
 
-    public static final String KEY="xxxxxxx";
+    public static final String KEY="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJTKct/kMLVLzI+e2ZTnZnqCmNKY\n" +
+            "HJY4kTbZZACF0Okjis9r7YGE/+gFOZ2cNFV+vibumAkKKMCgnWrfinRQYqcxGF2IGv8U6PJWlL44\n" +
+            "NE1sr6eMXuV0ip2PFoOaw9m7r2se8pCf3Cl3r8USA1/snoQwo76rME/r0IotUuXLFjudAgMBAAEC\n" +
+            "gYBaQvovIlH+GW6ODdJ2x23ekg09bDOjWcuWF4jX3FXgqMQTkqixMsq/qTPLjjAdUVbvbTxj93rD\n" +
+            "aGw2okduyjkdv+W0fOJdxv+8MPxrqFCJC25OAF5gRF/in4cm+Bk2wAHWWO9ZgDf7c9djEBSnqKQT\n" +
+            "e7hjJSRjpshVjnCyiZJZAQJBANfhrRWGO6mln6dH8+rfYnFCyf0AWjIgsd6RkXbOFF5kVXM8tjtJ\n" +
+            "unapRG8fNPeoblkszbCh7Dwxl+txWCZko90CQQCwcQF/2Lyi4Xq380ALBTtD6HzAAGS/qPj23j2H\n" +
+            "LeHlDUebiYlJ3AP5YHN9tQqku0hRt/Hw8hMgB1XJyjYt11rBAkA3cf7CSHeKWr9md1RuPnFKJZ07\n" +
+            "HZwMw9jrEPgLS2Jv29UWg8FJ+OWrFE4/PASeluPAg4FQnEXQL+yUy8eYFMEBAkAe/YpM4U2osj/y\n" +
+            "xVfvV5jkQZZ/xtHrVAt+mORntOhjaeS07gBeJ7XO/GDsqHrZGkgGim+FaY9wZblsuwavII9BAkEA\n" +
+            "g/ig6Xxjp7iKJ/J4QwcawAk9X2ehLNxoqw2FAWOdJHWjflmgT6na1FO8MmtvAbAEICAtIAzoQa5W\n" +
+            "4L82IRVAbw==";
 
-    public static final String SIGN="xxxxxzTxxxxw=";
+    public static final String SIGN="LGSuiGoJa9cj5lIdNicXNwZ9PYdcylN0rUnU4zYIztmHpUHXP13Ttdo/KMw1HWLxAS6LHOahRC2QhZdiu0uvzT/jEUjq08vT5JPCbs91hFw=";
 
     /**
      * BASE64解密

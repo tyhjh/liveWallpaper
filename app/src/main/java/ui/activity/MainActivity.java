@@ -335,6 +335,8 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         int screenheightDip = dm.heightPixels;
         Application.setHeight(screenheightDip);
         Application.setWidth(screenWidthDip);
+
+        log("setWidth："+Application.getWidth()+"   +setHeight："+Application.getHeight());
     }
 
     @Override
@@ -503,5 +505,10 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
                 toast(msg);
             }
         }).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 }
