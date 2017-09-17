@@ -46,8 +46,9 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
     @Override
     public void onBindViewHolder(final PaperHolder holder, int position) {
         holder.tv_name.setText(papers.get(position).getName() + "");
-        if (papers.get(holder.getPosition()).getId() > 0) {
+        if (papers.get(holder.getPosition()).getId() >=0) {
             Picasso.with(context).load(papers.get(holder.getPosition()).getImage()).resize(100, 100).centerCrop().into(holder.iv_paper);
+            //Glide.with(context).load(papers.get(holder.getPosition()).getImage()).apply(GlideOption.getOption()).into(holder.iv_paper);
         } else {
             switch (papers.get(holder.getPosition()).getId()) {
                 case -1:

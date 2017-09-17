@@ -37,8 +37,14 @@ public class GifWallpaperService extends WallpaperService {
 
             if (Application.getGifPath() == null)
                 stream = getAssets().open("flower.gif");
-            else
-                stream=new FileInputStream(new File(Application.getGifPath()));
+            else{
+                File file=new File(Application.getGifPath());
+                if(file.exists())
+                    stream=new FileInputStream(file);
+                else
+                    stream = getAssets().open("flower.gif");
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,6 +81,9 @@ public class GifWallpaperService extends WallpaperService {
         };
 
         private void drawFrame() {
+            if(movie==null){
+                initGif();
+            }
             Canvas canvas = null;
             canvas = getSurfaceHolder().lockCanvas();
             canvas.scale(scaleWidth, scaleWidth);
@@ -98,6 +107,15 @@ public class GifWallpaperService extends WallpaperService {
 
         }
 
+
+        @Override
+        public void onSurfaceCreated(SurfaceHolder holder) {
+            super.onSurfaceCreated(holder);
+            if(movie==null){
+                initGif();
+            }
+            drawFrame();
+        }
 
         @Override
         public void onDestroy() {
