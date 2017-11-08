@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
 
@@ -43,7 +44,6 @@ import ui.common.BaseActivity;
 import ui.service.GifWallpaperService;
 import util.ConvertUtil;
 import util.image.BlurUtil;
-import util.image.GlideOption;
 
 @EActivity(R.layout.activity_gif)
 public class GifActivity extends BaseActivity implements ShowDownloadFile {
@@ -93,9 +93,9 @@ public class GifActivity extends BaseActivity implements ShowDownloadFile {
         cdv.setLayoutParams(new LinearLayout.LayoutParams(Application.getVideoWidth(), Application.getVideoHeight()));
         tv_action.setText("设为壁纸");
         if (finish) {
-            Glide.with(this).load(wallPaper.getDataPath()).apply(GlideOption.getOption()).into(iv_gif);
+            Glide.with(this).load(wallPaper.getDataPath()).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv_gif);
         } else {
-            Glide.with(this).load(wallPaper.getMv()).apply(GlideOption.getOption()).into(iv_gif);
+            Glide.with(this).load(wallPaper.getMv()).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv_gif);
         }
         getBgBitmap();
     }

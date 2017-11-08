@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.squareup.picasso.Picasso;
 import com.tyhj.wallpaper.R;
 
 import java.util.ArrayList;
@@ -46,22 +47,22 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
     @Override
     public void onBindViewHolder(final PaperHolder holder, int position) {
         holder.tv_name.setText(papers.get(position).getName() + "");
-        if (papers.get(holder.getPosition()).getId() >=0) {
-            Picasso.with(context).load(papers.get(holder.getPosition()).getImage()).resize(100, 100).centerCrop().into(holder.iv_paper);
-            //Glide.with(context).load(papers.get(holder.getPosition()).getImage()).apply(GlideOption.getOption()).into(holder.iv_paper);
+        if (papers.get(holder.getPosition()).getId() >= 0) {
+            //Picasso.with(context).load(papers.get(holder.getPosition()).getImage()).resize(100, 100).centerCrop().into(holder.iv_paper);
+            Glide.with(context).load(papers.get(holder.getPosition()).getImage()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.iv_paper);
         } else {
             switch (papers.get(holder.getPosition()).getId()) {
                 case -1:
-                    Picasso.with(context).load(R.mipmap.logo1).into(holder.iv_paper);
+                    Glide.with(context).load(R.mipmap.logo1).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.iv_paper);
                     break;
                 case -2:
-                    Picasso.with(context).load(R.mipmap.ic_camera).into(holder.iv_paper);
+                    Glide.with(context).load(R.mipmap.ic_camera).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.iv_paper);
                     break;
                 case -3:
-                    Picasso.with(context).load(R.mipmap.ic_bird).into(holder.iv_paper);
+                    Glide.with(context).load(R.mipmap.ic_bird).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.iv_paper);
                     break;
                 case -4:
-                    Picasso.with(context).load(R.mipmap.ic_girl).into(holder.iv_paper);
+                    Glide.with(context).load(R.mipmap.ic_girl).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.iv_paper);
                     break;
             }
         }
@@ -70,7 +71,7 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
             public void onClick(View v) {
                 Intent intent;
 
-                if (papers.get(holder.getPosition()).getMv()==null||papers.get(holder.getPosition()).getMv().endsWith(".mp4"))
+                if (papers.get(holder.getPosition()).getMv() == null || papers.get(holder.getPosition()).getMv().endsWith(".mp4"))
                     intent = new Intent(context, ShowImage_.class);
                 else
                     intent = new Intent(context, GifActivity_.class);

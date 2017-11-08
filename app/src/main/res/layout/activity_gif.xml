@@ -21,6 +21,7 @@
 
             <ImageView
                 android:id="@+id/iv_gif"
+                android:scaleType="centerCrop"
                 android:theme="@android:style/Theme.Translucent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

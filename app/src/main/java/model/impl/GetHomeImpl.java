@@ -17,7 +17,7 @@ import util.key.KeyUtil;
  * Created by Tyhj on 2017/5/29.
  */
 
-public class GetHomeImpl{
+public class GetHomeImpl {
     ShowHome listener;
 
     @Inject
@@ -26,7 +26,7 @@ public class GetHomeImpl{
     }
 
     public void getHome() {
-        HomeApi homeApi= Application.getRetrofit().create(HomeApi.class);
+        HomeApi homeApi = Application.getRetrofit().create(HomeApi.class);
         try {
             homeApi.getHome(KeyUtil.sign(KeyUtil.SIGN.getBytes(), KeyUtil.KEY), KeyUtil.SIGN)
                     .subscribeOn(Schedulers.io())
@@ -39,9 +39,9 @@ public class GetHomeImpl{
 
                         @Override
                         public void onNext(Home home) {
-                            if(home!=null){
+                            if (home != null) {
                                 listener.getHomeOk(home);
-                            }else {
+                            } else {
                                 listener.getHomeFaile();
                             }
 
@@ -62,4 +62,5 @@ public class GetHomeImpl{
         }
 
     }
+
 }
