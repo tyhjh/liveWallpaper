@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import util.image.ImageUtil;
+
 /**
  * Created by Tyhj on 2017/5/23.
  */
@@ -33,8 +35,8 @@ public class MallpaperService extends WallpaperService {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         // 设置想要的大小
-        int newWidth = 1080;
-        int newHeight = 1920;
+        int newWidth = ImageUtil.SCREEN_WIDTH;
+        int newHeight = ImageUtil.SCREEN_HEIGHT;
         // 计算缩放比例
         float scaleWidth = ((float) newWidth) / width;
         float scaleHeight = ((float) newHeight) / height;

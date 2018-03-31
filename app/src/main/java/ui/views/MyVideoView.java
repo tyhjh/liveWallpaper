@@ -34,7 +34,6 @@ public class MyVideoView extends VideoView{
         // Log.i("@@@@", "onMeasure");
 
         //下面的代码是让视频的播放的长宽是根据你设置的参数来决定
-
         int width = getDefaultSize(Application.getVideoWidth(), widthMeasureSpec);
         int height = getDefaultSize(Application.getVideoHeight(), heightMeasureSpec);
         setMeasuredDimension(width, height);

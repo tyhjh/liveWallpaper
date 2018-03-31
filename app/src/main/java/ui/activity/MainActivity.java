@@ -13,7 +13,6 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -74,6 +73,9 @@ import util.CommonUtil;
 import util.ConvertUtil;
 import util.app.AppUtil;
 import util.image.BlurUtil;
+import util.image.ImageUtil;
+
+import static util.image.ImageUtil.getWidth;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements ShowWallPapers, SetUserInfo, CheckUpdate, ShowDownloadFile, ShowHome, GetLeftNote {
@@ -162,7 +164,7 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSrcWidth();
+        getWidth(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
@@ -202,6 +204,8 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
     @AfterViews
     void afterView() {
         initHeart();
+        Application.setHeight(ImageUtil.SCREEN_HEIGHT);
+        Application.setWidth(ImageUtil.SCREEN_WIDTH);
         surFace.setVisibility(View.GONE);
         Picasso.with(this).load(R.mipmap.home_bg).into(iv_bg);
         initRecycleView();
@@ -328,16 +332,6 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
 
     }
 
-    private void getSrcWidth() {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int screenWidthDip = dm.widthPixels;// 屏幕宽（dip，如：320dip）
-        int screenheightDip = dm.heightPixels;
-        Application.setHeight(screenheightDip);
-        Application.setWidth(screenWidthDip);
-
-        log("setWidth："+Application.getWidth()+"   +setHeight："+Application.getHeight());
-    }
 
     @Override
     public void lastVersion() {
@@ -464,7 +458,7 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         Snackbar snackbar = Snackbar.make(iv_bg, "确认同步壁纸资源", Snackbar.LENGTH_SHORT).setAction("whyNot", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639")) {
+                if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639")||CommonUtil.getDeviceIMEI(MainActivity.this).equals("352713095454890")) {
                     sycnPaper();
                 } else {
                     Toast.makeText(MainActivity.this, "你没有该权限", Toast.LENGTH_LONG).show();

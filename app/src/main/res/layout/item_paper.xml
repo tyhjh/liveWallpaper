@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:clickable="true"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="centerCrop"

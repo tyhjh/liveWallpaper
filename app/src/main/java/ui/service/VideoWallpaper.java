@@ -3,7 +3,6 @@ package ui.service;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.service.wallpaper.WallpaperService;
-import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.tyhj.wallpaper.Application;
@@ -32,6 +31,7 @@ public class VideoWallpaper extends WallpaperService {
                 return;
             mp = MediaPlayer.create(getApplicationContext(), R.raw.bird);
             mp.setSurface(holder.getSurface());
+            //mp.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT);
             mp.setLooping(true);
             mp.start();
         }
@@ -70,5 +70,6 @@ public class VideoWallpaper extends WallpaperService {
             super.onDestroy();
         }
     }
+
 
 }

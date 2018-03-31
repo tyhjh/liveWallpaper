@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Movie;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -13,6 +14,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import util.image.ImageUtil;
 
 /**
  * Created by Tyhj on 2017/5/23.
@@ -54,8 +57,12 @@ public class GifWallpaperService extends WallpaperService {
         int width = movie.width();
         int height = movie.height();
         // 设置想要的大小
-        int newWidth = Application.getWidth();
-        int newHeight = Application.getHeight();
+        int newWidth = ImageUtil.SCREEN_WIDTH;
+        int newHeight = ImageUtil.SCREEN_HEIGHT;
+
+        Log.e("宽度：",newWidth +"");
+        Log.e("长度：", newHeight+"");
+
         // 计算缩放比例
         scaleWidth = ((float) newWidth) / width;
         scaleHeight = ((float) newHeight) / height;

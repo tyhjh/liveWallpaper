@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.tyhj.wallpaper.R;
 
 import java.util.ArrayList;
@@ -89,13 +89,13 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
     }
 
     class PaperHolder extends RecyclerView.ViewHolder {
-        SimpleDraweeView iv_paper;
+        ImageView iv_paper;
         TextView tv_name;
 
         public PaperHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            iv_paper = (SimpleDraweeView) itemView.findViewById(R.id.iv_paper);
+            iv_paper = (ImageView) itemView.findViewById(R.id.iv_paper);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 iv_paper.setClipToOutline(true);
                 iv_paper.setOutlineProvider(Uiutil.getOutline(false, 10, 12));

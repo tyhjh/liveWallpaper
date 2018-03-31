@@ -48,7 +48,7 @@
                 android:id="@+id/iv_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:src="@drawable/ic_chevron_left" />
 
