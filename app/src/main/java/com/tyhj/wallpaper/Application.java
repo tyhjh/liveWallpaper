@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.avos.avoscloud.AVOSCloud;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.litesuits.orm.LiteOrm;
 import com.squareup.picasso.LruCache;
@@ -40,7 +39,6 @@ public class Application extends android.app.Application {
         super.onCreate();
         // 初始化参数依次为 this, AppId, AppKey
         context=getBaseContext();
-        AVOSCloud.initialize(this, "9TEdV93wArW7MsWdxs68q3SA-gzGzoHsz", "GWOVe9GReFOYa6HlnefJzE98");
         liteOrm = LiteOrm.newSingleInstance(getApplicationContext(), ".db");
         initDir();
         initPicasso();

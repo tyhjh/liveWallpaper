@@ -1,5 +1,6 @@
 package ui.activity;
 
+import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -38,6 +39,8 @@ import di.component.DaggerPaperComponent;
 import di.modules.ShowImageModule;
 import model.entity.WallPaper;
 import model.entity.WallPaperNow;
+import permison.PermissonUtil;
+import permison.listener.PermissionListener;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
 import ui.common.BaseActivity;
@@ -45,7 +48,6 @@ import ui.service.CameraLiveWallpaper;
 import ui.service.MallpaperService;
 import ui.service.VideoWallpaper;
 import ui.views.MyVideoView;
-import util.CommonUtil;
 import util.ConvertUtil;
 import util.file.FileUtil;
 import util.https.InternetUtil;
@@ -93,9 +95,18 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         wallPaper = (WallPaper) getIntent().getSerializableExtra("wallPager");
-        if (Application.isFirstCamera && wallPaper.getId() == -2) {
-            CommonUtil.getAppDetailSettingIntent(this);
-            Application.isFirstCamera = false;
+        if (wallPaper.getId() == -2) {
+            PermissonUtil.checkPermission(this, new PermissionListener() {
+                @Override
+                public void havePermission() {
+                    setSelf();
+                }
+
+                @Override
+                public void requestPermissionFail() {
+                    finish();
+                }
+            }, Manifest.permission.CAMERA);
         } else {
             setSelf();
         }
