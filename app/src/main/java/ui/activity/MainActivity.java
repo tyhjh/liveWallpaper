@@ -275,6 +275,11 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         papers.add(new WallPaper(-2, 0, null, "相机", null, null, null, null));
         papers.add(new WallPaper(-3, 0, null, "小鸟", null, null, null, null));
         papers.add(new WallPaper(-4, 0, null, "女孩", null, null, null, null));
+        papers.add(new WallPaper(5, 2,
+                "http://lc-9tedv93w.cn-n1.lcfile.com/8b04fcf7722db182483c.gif",
+                "GIF",
+                "http://lc-9tedv93w.cn-n1.lcfile.com/8b04fcf7722db182483c.gif", null, null,
+                "http://lc-9tedv93w.cn-n1.lcfile.com/8b04fcf7722db182483c.gif"));
     }
 
     @Click(R.id.fab)
@@ -458,7 +463,7 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         Snackbar snackbar = Snackbar.make(iv_bg, "确认同步壁纸资源", Snackbar.LENGTH_SHORT).setAction("whyNot", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639")||CommonUtil.getDeviceIMEI(MainActivity.this).equals("352713095454890")) {
+                if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639") || CommonUtil.getDeviceIMEI(MainActivity.this).equals("352713095454890")) {
                     sycnPaper();
                 } else {
                     Toast.makeText(MainActivity.this, "你没有该权限", Toast.LENGTH_LONG).show();
