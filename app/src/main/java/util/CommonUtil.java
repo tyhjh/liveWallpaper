@@ -37,13 +37,8 @@ public class CommonUtil {
      * 获取当前设备的IMIE，需与上面的isPhone一起使用
      */
     public static String getDeviceIMEI(Context context) {
-        String deviceId="";
-        if (isPhone(context)) {
-            TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            deviceId = telephony.getDeviceId();
-        } else {
-            deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        }
+        String deviceId = "";
+        deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         return deviceId;
     }
 

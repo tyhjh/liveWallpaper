@@ -1,4 +1,4 @@
-package ui.service;
+package com.tyhj.wallpaper.ui.service;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

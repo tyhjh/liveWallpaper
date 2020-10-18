@@ -2,6 +2,8 @@ package di.modules;
 
 import android.content.Context;
 
+import com.tyhj.wallpaper.ui.activity.MainActivity;
+
 import javax.inject.Named;
 
 import dagger.Module;
@@ -12,7 +14,6 @@ import presenter.GetLeftNote;
 import presenter.SetUserInfo;
 import presenter.ShowHome;
 import presenter.ShowWallPapers;
-import ui.activity.MainActivity;
 import util.CommonUtil;
 
 /**

@@ -1,4 +1,4 @@
-package ui.activity;
+package com.tyhj.wallpaper.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,17 +24,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dhht.annotation.Background;
+import com.dhht.annotation.Click;
+import com.dhht.annotation.UiThread;
+import com.dhht.annotation.ViewById;
+import com.dhht.annotationlibrary.ViewInjector;
 import com.squareup.picasso.Picasso;
 import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.LongClick;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
+import com.tyhj.wallpaper.ui.adpter.PaperAdapter;
+import com.tyhj.wallpaper.ui.common.BaseActivity;
+import com.tyhj.wallpaper.ui.views.MyDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,9 +66,6 @@ import presenter.impl.SignPresenter;
 import presenter.impl.SyncWallpaper;
 import presenter.impl.WallpapersPresenter;
 import tyrantgit.widget.HeartLayout;
-import ui.adpter.PaperAdapter;
-import ui.common.BaseActivity;
-import ui.views.MyDialog;
 import util.CommonUtil;
 import util.ConvertUtil;
 import util.app.AppUtil;
@@ -77,7 +74,6 @@ import util.image.ImageUtil;
 
 import static util.image.ImageUtil.getWidth;
 
-@EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements ShowWallPapers, SetUserInfo, CheckUpdate, ShowDownloadFile, ShowHome, GetLeftNote {
 
     int position = 0;
@@ -164,8 +160,12 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         getWidth(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        ViewInjector.injectView(this);
+        afterView();
+        //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA}, 0);
     }
 
     @Override
@@ -201,7 +201,9 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         }
     }
 
-    @AfterViews
+
+
+
     void afterView() {
         initHeart();
         Application.setHeight(ImageUtil.SCREEN_HEIGHT);
@@ -227,6 +229,12 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
 
 
         getLeftNote();
+
+
+        findViewById(R.id.fab).setOnLongClickListener((v)->{
+            root();
+            return true;
+        });
     }
 
     @Background
@@ -458,7 +466,6 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         dialog.setCancelable(true);
     }
 
-    @LongClick(R.id.fab)
     void root() {
         Snackbar snackbar = Snackbar.make(iv_bg, "确认同步壁纸资源", Snackbar.LENGTH_SHORT).setAction("whyNot", new View.OnClickListener() {
             @Override

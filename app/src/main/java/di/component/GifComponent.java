@@ -2,7 +2,7 @@ package di.component;
 
 import dagger.Component;
 import di.modules.ShowImageModule;
-import ui.activity.GifActivity;
+import com.tyhj.wallpaper.ui.activity.GifActivity;
 
 /**
  * Created by Tyhj on 2017/9/5.

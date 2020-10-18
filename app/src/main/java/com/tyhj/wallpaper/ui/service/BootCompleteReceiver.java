@@ -1,4 +1,4 @@
-package ui.service;
+package com.tyhj.wallpaper.ui.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

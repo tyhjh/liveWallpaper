@@ -1,14 +1,9 @@
-package ui.service;
+package com.tyhj.wallpaper.ui.service;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.service.wallpaper.WallpaperService;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;

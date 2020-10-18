@@ -3,7 +3,7 @@ package di.component;
 import dagger.Component;
 import di.modules.MainModule;
 import di.modules.ShowImageModule;
-import ui.activity.MainActivity;
+import com.tyhj.wallpaper.ui.activity.MainActivity;
 
 /**
  * Created by Tyhj on 2017/6/10.

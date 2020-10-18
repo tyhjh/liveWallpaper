@@ -1,4 +1,4 @@
-package ui.activity;
+package com.tyhj.wallpaper.ui.activity;
 
 import android.app.WallpaperManager;
 import android.content.ComponentName;
@@ -18,15 +18,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dhht.annotation.Background;
+import com.dhht.annotation.Click;
+import com.dhht.annotation.UiThread;
+import com.dhht.annotation.ViewById;
+import com.dhht.annotationlibrary.ViewInjector;
 import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,12 +38,11 @@ import model.entity.WallPaper;
 import model.entity.WallPaperNow;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
-import ui.common.BaseActivity;
-import ui.service.GifWallpaperService;
+import com.tyhj.wallpaper.ui.common.BaseActivity;
+import com.tyhj.wallpaper.ui.service.GifWallpaperService;
 import util.ConvertUtil;
 import util.image.BlurUtil;
 
-@EActivity(R.layout.activity_gif)
 public class GifActivity extends BaseActivity implements ShowDownloadFile {
 
     WallPaper wallPaper;
@@ -79,6 +76,8 @@ public class GifActivity extends BaseActivity implements ShowDownloadFile {
         super.onCreate(savedInstanceState);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_gif);
+        ViewInjector.injectView(this);
         wallPaper = (WallPaper) getIntent().getSerializableExtra("wallPager");
         if (wallPaper.getDataPath() != null && new File(wallPaper.getDataPath()).exists()) {
             finish = true;
@@ -86,9 +85,10 @@ public class GifActivity extends BaseActivity implements ShowDownloadFile {
             download();
             start = true;
         }
+        afterViews();
     }
 
-    @AfterViews
+
     void afterViews() {
         cdv.setLayoutParams(new LinearLayout.LayoutParams(Application.getVideoWidth(), Application.getVideoHeight()));
         tv_action.setText("设为壁纸");

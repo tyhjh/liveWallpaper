@@ -1,4 +1,4 @@
-package ui.activity;
+package com.tyhj.wallpaper.ui.activity;
 
 import android.Manifest;
 import android.app.WallpaperManager;
@@ -21,15 +21,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dhht.annotation.Background;
+import com.dhht.annotation.Click;
+import com.dhht.annotation.UiThread;
+import com.dhht.annotation.ViewById;
+import com.dhht.annotationlibrary.ViewInjector;
 import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
 
 import java.io.File;
 
@@ -43,17 +41,16 @@ import permison.PermissonUtil;
 import permison.listener.PermissionListener;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
-import ui.common.BaseActivity;
-import ui.service.CameraLiveWallpaper;
-import ui.service.MallpaperService;
-import ui.service.VideoWallpaper;
-import ui.views.MyVideoView;
+import com.tyhj.wallpaper.ui.common.BaseActivity;
+import com.tyhj.wallpaper.ui.service.CameraLiveWallpaper;
+import com.tyhj.wallpaper.ui.service.MallpaperService;
+import com.tyhj.wallpaper.ui.service.VideoWallpaper;
+import com.tyhj.wallpaper.ui.views.MyVideoView;
 import util.ConvertUtil;
 import util.file.FileUtil;
 import util.https.InternetUtil;
 import util.image.BlurUtil;
 
-@EActivity(R.layout.activity_show_image)
 public class ShowImage extends BaseActivity implements ShowDownloadFile {
 
     int mProgress = 0;
@@ -94,6 +91,8 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
         super.onCreate(savedInstanceState);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_show_image);
+        ViewInjector.injectView(this);
         wallPaper = (WallPaper) getIntent().getSerializableExtra("wallPager");
         if (wallPaper.getId() == -2) {
             PermissonUtil.checkPermission(this, new PermissionListener() {
@@ -119,9 +118,10 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
                 wallPaper.setDataPath(Environment.getExternalStorageDirectory() + "/AWallpaper/" + wallPaper.getName() + ".mp4");
             }
 
+        afterView();
+
     }
 
-    @AfterViews
     void afterView() {
         cdv.setLayoutParams(new LinearLayout.LayoutParams(Application.getVideoWidth(), Application.getVideoHeight()));
         initView();

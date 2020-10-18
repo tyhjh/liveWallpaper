@@ -1,4 +1,4 @@
-package ui.adpter;
+package com.tyhj.wallpaper.ui.adpter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,8 +18,8 @@ import com.tyhj.wallpaper.R;
 import java.util.ArrayList;
 
 import model.entity.WallPaper;
-import ui.activity.GifActivity_;
-import ui.activity.ShowImage_;
+import com.tyhj.wallpaper.ui.activity.GifActivity;
+import com.tyhj.wallpaper.ui.activity.ShowImage;
 import util.Uiutil;
 
 /**
@@ -72,9 +72,9 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperHolder>
                 Intent intent;
 
                 if (papers.get(holder.getPosition()).getMv() == null || papers.get(holder.getPosition()).getMv().endsWith(".mp4"))
-                    intent = new Intent(context, ShowImage_.class);
+                    intent = new Intent(context, ShowImage.class);
                 else
-                    intent = new Intent(context, GifActivity_.class);
+                    intent = new Intent(context, GifActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("wallPager", papers.get(holder.getPosition()));
                 intent.putExtras(bundle);

@@ -1,4 +1,4 @@
-package ui.activity;
+package com.tyhj.wallpaper.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

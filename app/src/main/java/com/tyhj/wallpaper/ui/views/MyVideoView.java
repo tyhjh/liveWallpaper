@@ -1,4 +1,4 @@
-package ui.views;
+package com.tyhj.wallpaper.ui.views;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -19,7 +19,7 @@
             app:cardCornerRadius="10dp"
             app:cardElevation="3dp">
 
-            <ui.views.MyVideoView
+            <com.tyhj.wallpaper.ui.views.MyVideoView
                 android:id="@+id/videoView"
                 android:theme="@android:style/Theme.Translucent"
                 android:layout_width="match_parent"
