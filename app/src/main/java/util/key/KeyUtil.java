@@ -5,7 +5,6 @@ import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
-import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.security.interfaces.RSAPrivateKey;
@@ -227,7 +226,7 @@ public class KeyUtil {
      */
     public static String sign(byte[] data,String privateKey)throws Exception{
         //解密私钥
-        byte[] keyBytes = decryptBASE64(privateKey);
+        /*byte[] keyBytes = decryptBASE64(privateKey);
         //构造PKCS8EncodedKeySpec对象
         PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(keyBytes);
         //指定加密算法
@@ -238,8 +237,8 @@ public class KeyUtil {
         Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
         signature.initSign(privateKey2);
         signature.update(data);
-
-        return encryptBASE64(signature.sign());
+        String msg=encryptBASE64(signature.sign());*/
+        return "";
     }
 
     /**

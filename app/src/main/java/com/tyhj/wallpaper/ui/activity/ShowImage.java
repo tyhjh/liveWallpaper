@@ -26,10 +26,17 @@ import com.dhht.annotation.Click;
 import com.dhht.annotation.UiThread;
 import com.dhht.annotation.ViewById;
 import com.dhht.annotationlibrary.ViewInjector;
+import com.dhht.annotationlibrary.threadPool.AppExecutors;
 import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
+import com.tyhj.wallpaper.ui.common.BaseActivity;
+import com.tyhj.wallpaper.ui.service.CameraLiveWallpaper;
+import com.tyhj.wallpaper.ui.service.MallpaperService;
+import com.tyhj.wallpaper.ui.service.VideoWallpaper;
+import com.tyhj.wallpaper.ui.views.MyVideoView;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -41,11 +48,6 @@ import permison.PermissonUtil;
 import permison.listener.PermissionListener;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
-import com.tyhj.wallpaper.ui.common.BaseActivity;
-import com.tyhj.wallpaper.ui.service.CameraLiveWallpaper;
-import com.tyhj.wallpaper.ui.service.MallpaperService;
-import com.tyhj.wallpaper.ui.service.VideoWallpaper;
-import com.tyhj.wallpaper.ui.views.MyVideoView;
 import util.ConvertUtil;
 import util.file.FileUtil;
 import util.https.InternetUtil;
@@ -78,7 +80,7 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
     RelativeLayout relative;
 
     @ViewById
-    ImageView iv_back, iv_delete;
+    ImageView iv_back, iv_delete,ivPreview;
 
     @ViewById
     ProgressBar progress;
@@ -129,7 +131,9 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
 
     @Click(R.id.cdv)
     void crad() {
-
+        AppExecutors.getInstance().scheduledExecutorService().schedule(()->{
+            ivPreview.setVisibility(View.GONE);
+        },500, TimeUnit.MILLISECONDS);
         switch (wallPaper.getType()) {
             //自带
             case 1:
@@ -160,6 +164,19 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
     }
 
     private void initView() {
+
+
+        if(wallPaper.getType()==2){
+            String path=Environment.getExternalStorageDirectory() + "/AWallpaper/" + wallPaper.getName() +wallPaper.getId()+ ".mp4";
+            File file=new File(path);
+            if(file.exists()){
+                wallPaper.setDataPath(path);
+                wallPaper.setType(1);
+            }
+        }
+
+
+
         switch (wallPaper.getType()) {
             //自带
             case 0:
@@ -208,7 +225,9 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
     @UiThread
     void setPreView(Bitmap bitmap) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            //todo换
             videoView.setBackground(ConvertUtil.bitmap2Drawable(bitmap));
+            ivPreview.setImageBitmap(bitmap);
             relative.setBackground(ConvertUtil.bitmap2Drawable(BlurUtil.doBlur(bitmap, 10, 15)));
         }
     }

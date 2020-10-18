@@ -17,7 +17,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         applicationId "com.tyhj.wallpaper"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 7
         versionName "4.0"
@@ -90,7 +90,6 @@ dependencies {
 
     provided 'javax.annotation:jsr250-api:1.0'
 
-
     implementation 'com.google.dagger:dagger:2.19'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
 
@@ -99,6 +98,9 @@ dependencies {
         exclude group: 'com.android.support'
     })
     annotationProcessor 'com.github.tyhjh.Annotation:annotator:v1.1.6'
+
+
+    implementation 'com.github.tyhjh:CatLog:v1.0.1'
 };
 
 

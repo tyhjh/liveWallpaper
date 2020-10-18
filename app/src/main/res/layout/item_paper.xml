@@ -10,7 +10,7 @@
 
     <ImageView
         android:clickable="true"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="@color/white"
         android:scaleType="centerCrop"
         android:elevation="5dp"
         android:id="@+id/iv_paper"

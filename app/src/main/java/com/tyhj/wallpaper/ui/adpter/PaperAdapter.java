@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tyhj.wallpaper.R;
+import com.tyhj.wallpaper.ui.activity.GifActivity;
+import com.tyhj.wallpaper.ui.activity.ShowImage;
 
 import java.util.ArrayList;
 
 import model.entity.WallPaper;
-import com.tyhj.wallpaper.ui.activity.GifActivity;
-import com.tyhj.wallpaper.ui.activity.ShowImage;
 import util.Uiutil;
 
 /**

@@ -1,5 +1,6 @@
 package com.tyhj.wallpaper.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,7 +24,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dhht.annotation.Background;
 import com.dhht.annotation.Click;
@@ -34,6 +35,7 @@ import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
 import com.tyhj.wallpaper.ui.adpter.PaperAdapter;
 import com.tyhj.wallpaper.ui.common.BaseActivity;
+import com.tyhj.wallpaper.ui.service.VideoWallpaper;
 import com.tyhj.wallpaper.ui.views.MyDialog;
 
 import java.io.File;
@@ -68,6 +70,7 @@ import presenter.impl.WallpapersPresenter;
 import tyrantgit.widget.HeartLayout;
 import util.CommonUtil;
 import util.ConvertUtil;
+import util.SharedPreferencesUtil;
 import util.app.AppUtil;
 import util.image.BlurUtil;
 import util.image.ImageUtil;
@@ -165,7 +168,7 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ViewInjector.injectView(this);
         afterView();
-        //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA}, 0);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA}, 0);
     }
 
     @Override
@@ -202,8 +205,6 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
     }
 
 
-
-
     void afterView() {
         initHeart();
         Application.setHeight(ImageUtil.SCREEN_HEIGHT);
@@ -219,7 +220,7 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
                 .inject(this);
 
 
-        presenter.getWallPaperToShow();
+        //presenter.getWallPaperToShow();
         localPaperPresenter.getLocalPaperToshow();
         checkUpdatePresenter.showCheckUpdate();
         userInfoPresenter.setUserInfoToShow();
@@ -228,10 +229,11 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         log(CommonUtil.getAndroidVersion());
 
 
-        getLeftNote();
+        //获取留言
+        //getLeftNote();
 
 
-        findViewById(R.id.fab).setOnLongClickListener((v)->{
+        findViewById(R.id.fab).setOnLongClickListener((v) -> {
             root();
             return true;
         });
@@ -283,11 +285,61 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
         papers.add(new WallPaper(-2, 0, null, "相机", null, null, null, null));
         papers.add(new WallPaper(-3, 0, null, "小鸟", null, null, null, null));
         papers.add(new WallPaper(-4, 0, null, "女孩", null, null, null, null));
+
+
         papers.add(new WallPaper(5, 2,
-                "http://lc-9tedv93w.cn-n1.lcfile.com/8b04fcf7722db182483c.gif",
-                "GIF",
-                "http://lc-9tedv93w.cn-n1.lcfile.com/8b04fcf7722db182483c.gif", null, null,
-                "http://lc-9tedv93w.cn-n1.lcfile.com/8b04fcf7722db182483c.gif"));
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfc752OE1u9ooogo1_540.gif",
+                "荡漾",
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfc752OE1u9ooogo1_540.gif", null, null,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfc752OE1u9ooogo1_540.gif"));
+
+
+        papers.add(new WallPaper(5, 2,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfithOhg1u9ooogo1_500.gif",
+                "flowers",
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfithOhg1u9ooogo1_500.gif", null, null,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfithOhg1u9ooogo1_500.gif"));
+
+        papers.add(new WallPaper(5, 2,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfl7ulfP1u9ooogo1_540.gif",
+                "花露水",
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfl7ulfP1u9ooogo1_540.gif", null, null,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfl7ulfP1u9ooogo1_540.gif"));
+
+
+        papers.add(new WallPaper(5, 2,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfnnu2ao1u9ooogo1_540.gif",
+                "花瓶",
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfnnu2ao1u9ooogo1_540.gif", null, null,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_o8nfnnu2ao1u9ooogo1_540.gif"));
+
+        papers.add(new WallPaper(5, 2,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_ociyzbGyJR1u9ooogo1_540.gif",
+                "per",
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_ociyzbGyJR1u9ooogo1_540.gif", null, null,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_ociyzbGyJR1u9ooogo1_540.gif"));
+
+
+        papers.add(new WallPaper(5, 2,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_ocs5cwhnsP1u9ooogo1_540.gif",
+                "雷云",
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_ocs5cwhnsP1u9ooogo1_540.gif", null, null,
+                "http://tyhjh.com:8001/wallpaper/Cinemagraph/tumblr_ocs5cwhnsP1u9ooogo1_540.gif"));
+
+
+        papers.add(new WallPaper(6, 1,
+                "http://tyhjh.com:8001/wallpaper/mini/miku.jpg",
+                "mikuo",
+                "http://tyhjh.com:8001/wallpaper/Video/mikuo.mp4", null, null,
+                "http://tyhjh.com:8001/wallpaper/mini/miku.jpg"));
+
+        papers.add(new WallPaper(7, 1,
+                "http://tyhjh.com:8001/wallpaper/mini/%E5%88%9D%E9%9F%B3.jpg",
+                "初音",
+                "http://tyhjh.com:8001/wallpaper/Video/%E5%88%9D%E9%9F%B3.mp4", null, null,
+                "http://tyhjh.com:8001/wallpaper/mini/%E5%88%9D%E9%9F%B3.jpg"));
+
+
     }
 
     @Click(R.id.fab)
@@ -467,14 +519,24 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
     }
 
     void root() {
-        Snackbar snackbar = Snackbar.make(iv_bg, "确认同步壁纸资源", Snackbar.LENGTH_SHORT).setAction("whyNot", new View.OnClickListener() {
+
+        String msg = null;
+        boolean closeVolume = SharedPreferencesUtil.getBoolean(VideoWallpaper.CLOSE_VOLUME, false);
+        if (!closeVolume) {
+            msg = "确认关闭视频壁纸声音";
+        } else {
+            msg = "确认开启视频壁纸声音";
+        }
+
+        Snackbar snackbar = Snackbar.make(iv_bg, msg, Snackbar.LENGTH_SHORT).setAction("whyNot", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639") || CommonUtil.getDeviceIMEI(MainActivity.this).equals("352713095454890")) {
+                SharedPreferencesUtil.save(VideoWallpaper.CLOSE_VOLUME, !closeVolume);
+                /*if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639") || CommonUtil.getDeviceIMEI(MainActivity.this).equals("352713095454890")) {
                     sycnPaper();
                 } else {
                     Toast.makeText(MainActivity.this, "你没有该权限", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
         View view = snackbar.getView();

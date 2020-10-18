@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import com.display.loglibrary.LogUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.litesuits.orm.LiteOrm;
 import com.squareup.picasso.LruCache;
@@ -21,6 +22,7 @@ import okhttp3.Response;
 import retrofit.converter.WallpaperFactory;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import util.SharedPreferencesUtil;
 import util.https.InternetUtil;
 
 /**
@@ -44,6 +46,8 @@ public class Application extends android.app.Application {
         initPicasso();
         Fresco.initialize(getApplicationContext());
         initRetrofite();
+        LogUtil.init(this);
+        SharedPreferencesUtil.init(this);
     }
 
     private void initRetrofite() {

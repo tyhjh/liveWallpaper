@@ -18,7 +18,7 @@ public class WallpapersPresenter{
     }
 
     public void getWallPaperToShow(){
-        getPaper.getPaper();
+        //getPaper.getPaper();
     }
 
 }
