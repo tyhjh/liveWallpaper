@@ -25,6 +25,8 @@ import com.dhht.annotation.ViewById;
 import com.dhht.annotationlibrary.ViewInjector;
 import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
+import com.tyhj.wallpaper.ui.common.BaseActivity;
+import com.tyhj.wallpaper.ui.service.GifWallpaperService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,8 +40,6 @@ import model.entity.WallPaper;
 import model.entity.WallPaperNow;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
-import com.tyhj.wallpaper.ui.common.BaseActivity;
-import com.tyhj.wallpaper.ui.service.GifWallpaperService;
 import util.ConvertUtil;
 import util.image.BlurUtil;
 
@@ -79,6 +79,9 @@ public class GifActivity extends BaseActivity implements ShowDownloadFile {
         setContentView(R.layout.activity_gif);
         ViewInjector.injectView(this);
         wallPaper = (WallPaper) getIntent().getSerializableExtra("wallPager");
+
+        String path=Environment.getExternalStorageDirectory() + "/AWallpaper/" + wallPaper.getName()+wallPaper.getId()+ ".gif";
+        wallPaper.setDataPath(path);
         if (wallPaper.getDataPath() != null && new File(wallPaper.getDataPath()).exists()) {
             finish = true;
         } else {

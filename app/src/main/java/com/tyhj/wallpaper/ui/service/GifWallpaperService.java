@@ -28,12 +28,6 @@ public class GifWallpaperService extends WallpaperService {
     private float scaleWidth, scaleHeight;
 
 
-    @Override
-    public void onCreate() {
-        initGif();
-        super.onCreate();
-    }
-
     private void initGif() {
         InputStream stream = null;
         try {
@@ -108,6 +102,7 @@ public class GifWallpaperService extends WallpaperService {
         public void onCreate(SurfaceHolder surfaceHolder) {
             super.onCreate(surfaceHolder);
             setTouchEventsEnabled(true);
+            initGif();
         }
 
         public Mngine() {
@@ -118,9 +113,6 @@ public class GifWallpaperService extends WallpaperService {
         @Override
         public void onSurfaceCreated(SurfaceHolder holder) {
             super.onSurfaceCreated(holder);
-            if(movie==null){
-                initGif();
-            }
             drawFrame();
         }
 
@@ -128,11 +120,11 @@ public class GifWallpaperService extends WallpaperService {
         public void onDestroy() {
             super.onDestroy();
             mHandler.removeCallbacks(runnable);
+            movie=null;
         }
 
         @Override
         public void onVisibilityChanged(boolean visible) {
-            initGif();
             /*下面这个判断好玩，就是说，如果屏幕壁纸状态转为显式时重新绘制壁纸，否则黑屏幕，隐藏就可以*/
             if (visible) {
                 drawFrame();

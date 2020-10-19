@@ -339,6 +339,7 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
                 "http://tyhjh.com:8001/wallpaper/Video/%E5%88%9D%E9%9F%B3.mp4", null, null,
                 "http://tyhjh.com:8001/wallpaper/mini/%E5%88%9D%E9%9F%B3.jpg"));
 
+       
 
     }
 
