@@ -533,11 +533,6 @@ public class MainActivity extends BaseActivity implements ShowWallPapers, SetUse
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtil.save(VideoWallpaper.CLOSE_VOLUME, !closeVolume);
-                /*if (CommonUtil.getDeviceIMEI(MainActivity.this).equals("869011025169639") || CommonUtil.getDeviceIMEI(MainActivity.this).equals("352713095454890")) {
-                    sycnPaper();
-                } else {
-                    Toast.makeText(MainActivity.this, "你没有该权限", Toast.LENGTH_LONG).show();
-                }*/
             }
         });
         View view = snackbar.getView();

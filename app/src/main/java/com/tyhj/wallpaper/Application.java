@@ -24,6 +24,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import util.SharedPreferencesUtil;
 import util.https.InternetUtil;
+import util.image.ImageUtil;
 
 /**
  * Created by Tyhj on 2017/5/23.
@@ -33,14 +34,19 @@ public class Application extends android.app.Application {
     static LiteOrm liteOrm;
     public static boolean isFirstCamera = true;
     private static Retrofit retrofit;
-    private static boolean ISDEBUG=true;
+    private static boolean ISDEBUG = true;
     private static Context context;
-    private static String gifPath=null;
+    private static String gifPath = null;
+
+
+    public static final String GIF_PATH_KEY = "gif_Path_key";
+
     @Override
     public void onCreate() {
         super.onCreate();
+        ImageUtil.getWidth(this);
         // 初始化参数依次为 this, AppId, AppKey
-        context=getBaseContext();
+        context = getBaseContext();
         liteOrm = LiteOrm.newSingleInstance(getApplicationContext(), ".db");
         initDir();
         initPicasso();
@@ -48,6 +54,11 @@ public class Application extends android.app.Application {
         initRetrofite();
         LogUtil.init(this);
         SharedPreferencesUtil.init(this);
+        LogUtil.setLogFilepath("/sdcard/Log/LiveWallpaper");
+        LogUtil.setPrinttFileLevel(Log.VERBOSE);
+        LogUtil.i("init Application");
+        gifPath = SharedPreferencesUtil.getString(GIF_PATH_KEY, null);
+        imageDir=SharedPreferencesUtil.getString(IMAGE_PATH_KEY,null);
     }
 
     private void initRetrofite() {
@@ -61,13 +72,13 @@ public class Application extends android.app.Application {
                 .addNetworkInterceptor(getNetWorkInterceptor())
                 .cache(cache).build();
 
-            retrofit = new Retrofit
-                    .Builder()
-                    .baseUrl("http://www.tyhj5.com/wallPaper/")
-                    .client(client)
-                    .addConverterFactory(WallpaperFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build();
+        retrofit = new Retrofit
+                .Builder()
+                .baseUrl("http://www.tyhj5.com/wallPaper/")
+                .client(client)
+                .addConverterFactory(WallpaperFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
     }
 
     private void initPicasso() {
@@ -98,6 +109,8 @@ public class Application extends android.app.Application {
     private static int imageId = R.raw.girl;
 
     private static String imageDir = null;
+
+    public static String IMAGE_PATH_KEY="image_path_key";
 
     public static int getImageId() {
         return imageId;
@@ -150,7 +163,7 @@ public class Application extends android.app.Application {
     /**
      * 设置返回数据的  Interceptor  判断网络   没网读取缓存
      */
-    public Interceptor getInterceptor(){
+    public Interceptor getInterceptor() {
         return new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -168,7 +181,7 @@ public class Application extends android.app.Application {
     /**
      * 设置连接器  设置缓存
      */
-    public Interceptor getNetWorkInterceptor (){
+    public Interceptor getNetWorkInterceptor() {
         return new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -194,7 +207,7 @@ public class Application extends android.app.Application {
         };
     }
 
-    public static void log(String key,String msg) {
+    public static void log(String key, String msg) {
         if (ISDEBUG)
             Log.e(key, msg);
     }

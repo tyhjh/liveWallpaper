@@ -15,9 +15,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import util.image.ImageUtil;
+
 public class CameraLiveWallpaper extends WallpaperService {
 
     String TAG = "CameraLiveWallpaper";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ImageUtil.getWidth(this);
+    }
 
     public Engine onCreateEngine() {
         return new CameraEngine();

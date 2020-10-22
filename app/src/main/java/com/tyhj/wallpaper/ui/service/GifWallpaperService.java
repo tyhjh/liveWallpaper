@@ -4,10 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Movie;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import com.display.loglibrary.LogUtil;
 import com.tyhj.wallpaper.Application;
 
 import java.io.File;
@@ -28,23 +28,36 @@ public class GifWallpaperService extends WallpaperService {
     private float scaleWidth, scaleHeight;
 
 
+
+
+    public void onServiceConnected(){
+
+    }
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ImageUtil.getWidth(this);
+        LogUtil.i("onCreate");
+    }
+
     private void initGif() {
         InputStream stream = null;
         try {
-
-            if (Application.getGifPath() == null)
+            if (Application.getGifPath() == null) {
                 stream = getAssets().open("flower.gif");
-            else{
-                File file=new File(Application.getGifPath());
-                if(file.exists())
-                    stream=new FileInputStream(file);
-                else
+            } else {
+                File file = new File(Application.getGifPath());
+                if (file.exists()) {
+                    stream = new FileInputStream(file);
+                } else {
                     stream = getAssets().open("flower.gif");
+                }
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
+            LogUtil.e(e.toString());
         }
         movie = Movie.decodeStream(stream);
         //获取gif的宽高
@@ -54,8 +67,8 @@ public class GifWallpaperService extends WallpaperService {
         int newWidth = ImageUtil.SCREEN_WIDTH;
         int newHeight = ImageUtil.SCREEN_HEIGHT;
 
-        Log.e("宽度：",newWidth +"");
-        Log.e("长度：", newHeight+"");
+        LogUtil.i("宽度：", newWidth + "");
+        LogUtil.i("长度：", newHeight + "");
 
         // 计算缩放比例
         scaleWidth = ((float) newWidth) / width;
@@ -82,7 +95,7 @@ public class GifWallpaperService extends WallpaperService {
         };
 
         private void drawFrame() {
-            if(movie==null){
+            if (movie == null) {
                 initGif();
             }
             Canvas canvas = null;
@@ -103,6 +116,7 @@ public class GifWallpaperService extends WallpaperService {
             super.onCreate(surfaceHolder);
             setTouchEventsEnabled(true);
             initGif();
+            LogUtil.i("Engine onCreate");
         }
 
         public Mngine() {
@@ -114,17 +128,20 @@ public class GifWallpaperService extends WallpaperService {
         public void onSurfaceCreated(SurfaceHolder holder) {
             super.onSurfaceCreated(holder);
             drawFrame();
+            LogUtil.i("onSurfaceCreated");
         }
 
         @Override
         public void onDestroy() {
             super.onDestroy();
             mHandler.removeCallbacks(runnable);
-            movie=null;
+            movie = null;
+            LogUtil.i("onDestroy");
         }
 
         @Override
         public void onVisibilityChanged(boolean visible) {
+            LogUtil.i("onVisibilityChanged："+visible);
             /*下面这个判断好玩，就是说，如果屏幕壁纸状态转为显式时重新绘制壁纸，否则黑屏幕，隐藏就可以*/
             if (visible) {
                 drawFrame();
@@ -135,17 +152,18 @@ public class GifWallpaperService extends WallpaperService {
 
         @Override
         public void onTouchEvent(MotionEvent event) {
-
         }
 
         @Override
         public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            LogUtil.i("onSurfaceChanged");
             drawFrame();
             super.onSurfaceChanged(holder, format, width, height);
         }
 
         @Override
         public void onSurfaceDestroyed(SurfaceHolder holder) {
+            LogUtil.i("onSurfaceDestroyed");
             super.onSurfaceDestroyed(holder);
             mHandler.removeCallbacks(runnable);
         }

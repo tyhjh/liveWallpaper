@@ -49,6 +49,7 @@ import permison.listener.PermissionListener;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
 import util.ConvertUtil;
+import util.SharedPreferencesUtil;
 import util.file.FileUtil;
 import util.https.InternetUtil;
 import util.image.BlurUtil;
@@ -243,6 +244,7 @@ public class ShowImage extends BaseActivity implements ShowDownloadFile {
     private void setWallpaper() {
         Application.setImageId(-1);
         Application.setImageDir(wallPaper.getDataPath());
+        SharedPreferencesUtil.save(Application.IMAGE_PATH_KEY,wallPaper.getDataPath());
         changePaper(VideoWallpaper.class.getCanonicalName());
         wallPaperNow=new WallPaperNow(1,-1,0,wallPaper.getDataPath());
         Application.getLiteOrm().save(wallPaperNow);

@@ -30,6 +30,7 @@ public class MallpaperService extends WallpaperService {
 
     @Override
     public void onCreate() {
+        ImageUtil.getWidth(this);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.bg);
         // 获得图片的宽高
         int width = bitmap.getWidth();

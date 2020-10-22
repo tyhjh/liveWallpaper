@@ -1,11 +1,12 @@
 package com.tyhj.wallpaper.ui.common;
 
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.display.loglibrary.LogUtil;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -17,8 +18,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void log(String msg) {
-        if (ISDEBUG)
-            Log.e(getClass().getName(), msg);
+        if (ISDEBUG){
+            LogUtil.i(getClass().getName(), msg);
+        }
+
     }
 
     public void toast(String msg) {

@@ -12,6 +12,7 @@ import com.tyhj.wallpaper.Application;
 import com.tyhj.wallpaper.R;
 
 import model.entity.WallPaperNow;
+import util.image.ImageUtil;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.tyhj.wallpaper.Application.log;
@@ -29,6 +30,7 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        ImageUtil.getWidth(this);
     }
 
 

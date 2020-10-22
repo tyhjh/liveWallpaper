@@ -41,6 +41,7 @@ import model.entity.WallPaperNow;
 import presenter.ShowDownloadFile;
 import presenter.impl.DownloadPresenter;
 import util.ConvertUtil;
+import util.SharedPreferencesUtil;
 import util.image.BlurUtil;
 
 public class GifActivity extends BaseActivity implements ShowDownloadFile {
@@ -141,6 +142,7 @@ public class GifActivity extends BaseActivity implements ShowDownloadFile {
             }
         } else {//设置壁纸
             Application.setGifPath(wallPaper.getDataPath());
+            SharedPreferencesUtil.save(Application.GIF_PATH_KEY, wallPaper.getDataPath());
             log(wallPaper.getDataPath());
             changePaper(GifWallpaperService.class.getCanonicalName());
             wallPaperNow=new WallPaperNow(1,-1,0,wallPaper.getDataPath());

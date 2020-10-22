@@ -10,14 +10,16 @@ import com.display.loglibrary.LogUtil;
 import com.tyhj.wallpaper.Application;
 
 import util.SharedPreferencesUtil;
+import util.image.ImageUtil;
 
 public class VideoWallpaper extends WallpaperService {
 
-    public static final String CLOSE_VOLUME="close_volume";
+    public static final String CLOSE_VOLUME = "close_volume";
 
     @Override
     public void onCreate() {
         super.onCreate();
+        ImageUtil.getWidth(this);
         LogUtil.i("VideoWallpaper onCreate");
     }
 
@@ -45,17 +47,17 @@ public class VideoWallpaper extends WallpaperService {
             super.onCreate(surfaceHolder);
             LogUtil.i("VideoEngine onCreate");
             setTouchEventsEnabled(true);
-            resid=Application.getImageId();
-            uriString=Application.getImageDir();
-            if (resid!= -1) {
-                mp = MediaPlayer.create(getApplicationContext(), resid);
-            } else {
+            resid = Application.getImageId();
+            uriString = Application.getImageDir();
+            if (uriString != null) {
                 mp = MediaPlayer.create(getApplicationContext(), Uri.parse(uriString));
+            } else {
+                mp = MediaPlayer.create(getApplicationContext(), resid);
             }
             mp.setLooping(true);
-            if(SharedPreferencesUtil.getBoolean(CLOSE_VOLUME,false)){
+            if (SharedPreferencesUtil.getBoolean(CLOSE_VOLUME, false)) {
                 mp.setVolume(0.0f, 0.0f);
-            }else {
+            } else {
                 mp.setVolume(0.7f, 0.7f);
             }
         }
@@ -73,41 +75,41 @@ public class VideoWallpaper extends WallpaperService {
             LogUtil.i("VideoEngine onVisibilityChanged");
             if (mp != null) {
                 if (visible) {
-                    if(!mp.isPlaying()){
-                        if(resid!=-1&&Application.getImageId()!=-1){
-                            if(resid!=Application.getImageId()){
-                                resid=Application.getImageId();
-                                mp.reset();
-                                mp.release();
-                                mp=MediaPlayer.create(getApplicationContext(),resid);
-                                mp.setSurface(getSurfaceHolder().getSurface());
-                                mp.setLooping(true);
-                                if(SharedPreferencesUtil.getBoolean(CLOSE_VOLUME,false)){
-                                    mp.setVolume(0.0f, 0.0f);
-                                }else {
-                                    mp.setVolume(0.7f, 0.7f);
-                                }
-                                mp.start();
-                                return;
-                            }
-                        }else if(uriString==null||!uriString.equals(Application.getImageDir())){
-                            uriString=Application.getImageDir();
+                    if (!mp.isPlaying()) {
+                        if (uriString == null || !uriString.equals(Application.getImageDir())) {
+                            uriString = Application.getImageDir();
                             mp.reset();
                             mp.release();
                             mp = MediaPlayer.create(getApplicationContext(), Uri.parse(uriString));
                             mp.setSurface(getSurfaceHolder().getSurface());
                             mp.setLooping(true);
-                            if(SharedPreferencesUtil.getBoolean(CLOSE_VOLUME,false)){
+                            if (SharedPreferencesUtil.getBoolean(CLOSE_VOLUME, false)) {
                                 mp.setVolume(0.0f, 0.0f);
-                            }else {
+                            } else {
                                 mp.setVolume(0.7f, 0.7f);
                             }
                             mp.start();
                             return;
+                        } else if (resid != -1 && Application.getImageId() != -1) {
+                            if (resid != Application.getImageId()) {
+                                resid = Application.getImageId();
+                                mp.reset();
+                                mp.release();
+                                mp = MediaPlayer.create(getApplicationContext(), resid);
+                                mp.setSurface(getSurfaceHolder().getSurface());
+                                mp.setLooping(true);
+                                if (SharedPreferencesUtil.getBoolean(CLOSE_VOLUME, false)) {
+                                    mp.setVolume(0.0f, 0.0f);
+                                } else {
+                                    mp.setVolume(0.7f, 0.7f);
+                                }
+                                mp.start();
+                                return;
+                            }
                         }
-                        if(SharedPreferencesUtil.getBoolean(CLOSE_VOLUME,false)){
+                        if (SharedPreferencesUtil.getBoolean(CLOSE_VOLUME, false)) {
                             mp.setVolume(0.0f, 0.0f);
-                        }else {
+                        } else {
                             mp.setVolume(0.7f, 0.7f);
                         }
                         mp.seekTo(progress);
@@ -119,7 +121,6 @@ public class VideoWallpaper extends WallpaperService {
                 }
             }
         }
-
 
 
         @Override
